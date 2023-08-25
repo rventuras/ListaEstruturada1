@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Produto {
+    char nome[100];
+    float preco;
+    int estoque;
+};
+
+void comprarProduto(struct Produto *produto, int quantidade) {
+    if (produto->estoque >= quantidade) {
+        produto->estoque -= quantidade;
+        printf("Compra realizada com sucesso.\n");
+    } else {
+        printf("Estoque insuficiente.\n");
+    }
+}
+
+int main() {
+    struct Produto produto1;
+    
+    printf("Digite o nome do produto: ");
+    scanf(" %[^\n]", produto1.nome);
+
+    printf("Digite o preço do produto: ");
+    scanf("%f", &produto1.preco);
+
+    printf("Digite a quantidade em estoque: ");
+    scanf("%d", &produto1.estoque);
+
+    int opcao;
+    float totalCompra = 0;
+    
+    do {
+        printf("\nEscolha uma opção:\n");
+        printf("1. Comprar produto\n");
+        printf("2. Finalizar compra\n");
+        printf("3. Sair\n");
+        scanf("%d", &opcao);
+        
+        switch (opcao) {
+            case 1:
+                printf("Digite a quantidade a comprar: ");
+                int quantidadeCompra;
+                scanf("%d", &quantidadeCompra);
+                comprarProduto(&produto1, quantidadeCompra);
+                totalCompra += quantidadeCompra * produto1.preco;
+                break;
+            case 2:
+                printf("Total da compra: R$%.2f\n", totalCompra);
+                break;
+            case 3:
+                printf("Encerrando o programa.\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while (opcao != 3);
+
+    return 0;
+}

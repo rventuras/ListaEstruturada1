@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+struct Data {
+    int dia;
+    int mes;
+    int ano;
+};
+
+struct Funcionario {
+    char nome[100];
+    char cargo[50];
+    float salario;
+    struct Data dataAdmissao;
+};
+
+void darAumento(struct Funcionario *funcionario, float aumento) {
+    funcionario->salario += aumento;
+    printf("Aumento de salário aplicado com sucesso.\n");
+}
+
+int calcularTempoNaEmpresa(struct Data dataAdmissao) {
+    time_t agora;
+    struct tm *dataAtual;
+    time(&agora);
+    dataAtual = localtime(&agora);
+
+    int anos = dataAtual->tm_year + 1900 - dataAdmissao.ano;
+    int meses = dataAtual->tm_mon + 1 - dataAdmissao.mes;
+
+    if (meses < 0) {
+        anos--;
+        meses += 12;
+    }
+
+    return anos;
+}
+
+int main() {
+    struct Funcionario funcionario1;
+
+    printf("Digite o nome do funcionário: ");
+    scanf(" %[^\n]", funcionario1.nome);
+
+    printf("Digite o cargo do funcionário: ");
+    scanf(" %[^\n]", funcionario1.cargo);
+
+    printf("Digite o salário do funcionário: ");
+    scanf("%f", &funcionario1.salario);
+
+    printf("Digite a data de admissão do funcionário (dia mês ano): ");
+    scanf("%d %d %d", &funcionario1.dataAdmissao.dia, &funcionario1.dataAdmissao.mes, &funcionario1.dataAdmissao.ano);
+
+    int opcao;
+    do {
+        printf("\nEscolha uma opção:\n");
+        printf("1. Dar aumento de salário\n");
+        printf("2. Calcular tempo na empresa\n");
+        printf("3. Sair\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                printf("Digite o valor do aumento: ");
+                float aumento;
+                scanf("%f", &aumento);
+                darAumento(&funcionario1, aumento);
+                break;
+            case 2:
+                printf("Tempo na empresa: %d anos\n", calcularTempoNaEmpresa(funcionario1.dataAdmissao));
+                break;
+            case 3:
+                printf("Encerrando o programa.\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while (opcao != 3);
+
+    return 0;
+}

@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+struct Moeda {
+    float dolares;
+    float euros;
+};
+
+float taxaCambioAtual = 0.85; // Exemplo de taxa de câmbio: 1 dólar = 0.85 euro
+
+float converterDolaresParaEuros(float dolares) {
+    return dolares * taxaCambioAtual;
+}
+
+float converterEurosParaDolares(float euros) {
+    return euros / taxaCambioAtual;
+}
+
+int main() {
+    struct Moeda valor;
+
+    printf("Digite o valor em dólares: ");
+    scanf("%f", &valor.dolares);
+
+    printf("Digite o valor em euros: ");
+    scanf("%f", &valor.euros);
+
+    int opcao;
+    do {
+        printf("\nEscolha uma opção:\n");
+        printf("1. Converter de dólares para euros\n");
+        printf("2. Converter de euros para dólares\n");
+        printf("3. Sair\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                printf("Valor em euros: %.2f\n", converterDolaresParaEuros(valor.dolares));
+                break;
+            case 2:
+                printf("Valor em dólares: %.2f\n", converterEurosParaDolares(valor.euros));
+                break;
+            case 3:
+                printf("Encerrando o programa.\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while (opcao != 3);
+
+    return 0;
+}

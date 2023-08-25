@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LIVROS 100
+
+struct Livro {
+    char titulo[100];
+    char autor[50];
+    int anoPublicacao;
+};
+
+struct Livro biblioteca[MAX_LIVROS];
+int numLivros = 0;
+
+void adicionarLivro() {
+    if (numLivros < MAX_LIVROS) {
+        printf("Digite o título do livro: ");
+        scanf(" %[^\n]", biblioteca[numLivros].titulo);
+
+        printf("Digite o autor do livro: ");
+        scanf(" %[^\n]", biblioteca[numLivros].autor);
+
+        printf("Digite o ano de publicação do livro: ");
+        scanf("%d", &biblioteca[numLivros].anoPublicacao);
+
+        numLivros++;
+        printf("Livro adicionado com sucesso!\n");
+    } else {
+        printf("A biblioteca está cheia.\n");
+    }
+}
+
+void listarLivros() {
+    printf("Lista de livros:\n");
+    for (int i = 0; i < numLivros; i++) {
+        printf("Título: %s\nAutor: %s\nAno de Publicação: %d\n\n",
+               biblioteca[i].titulo, biblioteca[i].autor, biblioteca[i].anoPublicacao);
+    }
+}
+
+void buscarLivrosPorAutor() {
+    char autorBusca[50];
+    printf("Digite o nome do autor que deseja buscar: ");
+    scanf(" %[^\n]", autorBusca);
+
+    int encontrados = 0;
+    for (int i = 0; i < numLivros; i++) {
+        if (strcmp(biblioteca[i].autor, autorBusca) == 0) {
+            printf("Livro encontrado:\n");
+            printf("Título: %s\nAutor: %s\nAno de Publicação: %d\n\n",
+                   biblioteca[i].titulo, biblioteca[i].autor, biblioteca[i].anoPublicacao);
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro encontrado para esse autor.\n");
+    }
+}
+
+int main() {
+    int opcao;
+
+    do {
+        printf("\nEscolha uma opção:\n");
+        printf("1. Adicionar livro\n");
+        printf("2. Listar livros\n");
+        printf("3. Buscar livros por autor\n");
+        printf("4. Sair\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                adicionarLivro();
+                break;
+            case 2:
+                listarLivros();
+                break;
+            case 3:
+                buscarLivrosPorAutor();
+                break;
+            case 4:
+                printf("Encerrando o programa.\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while (opcao != 4);
+
+    return 0;
+}

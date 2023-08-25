@@ -1,1 +1,29 @@
 
+#include <stdio.h>
+#include <math.h>
+
+struct Ponto {
+    double x;
+    double y;
+};
+
+double calcularDistancia(struct Ponto p1, struct Ponto p2) {
+    return sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+}
+
+double calcularInclinacao(struct Ponto p1, struct Ponto p2) {
+    return (p2.y - p1.y) / (p2.x - p1.x);
+}
+
+int main() {
+    struct Ponto ponto1 = {1.0, 2.0};
+    struct Ponto ponto2 = {4.0, 6.0};
+
+    double distancia = calcularDistancia(ponto1, ponto2);
+    double inclinacao = calcularInclinacao(ponto1, ponto2);
+
+    printf("Distância entre os pontos: %.2f\n", distancia);
+    printf("Inclinação da reta: %.2f\n", inclinacao);
+
+    return 0;
+}

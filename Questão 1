@@ -1,0 +1,8 @@
+struct Pessoa {
+    var nome: String
+    var idade: Int
+    var altura: Double
+}
+
+var pessoa1 = Pessoa(nome: "João", idade: 25, altura: 1.75)
+print("Nome: \(pessoa1.nome), Idade: \(pessoa1.idade), Altura: \(pessoa1.altura)")

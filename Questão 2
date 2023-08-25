@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+struct Tipo {
+    int inteiro;
+    float flt;
+    char letra;
+};
+
+int main() {
+    struct Tipo X;
+
+    X.inteiro = 42;
+    X.flt = 3.14;
+    X.letra = 'A';
+
+    printf("Valor Inteiro: %d\n", X.inteiro);
+    printf("Valor Flutuante: %.2f\n", X.flt);
+    printf("Letra: %c\n", X.letra);
+
+    return 0;
+}
